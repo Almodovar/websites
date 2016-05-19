@@ -1,0 +1,106 @@
+@charset "utf-8";
+#wrapper {}
+
+#work {
+    width: 100%;
+    height: auto;
+}
+
+#history {
+    width: 15%;
+    margin-left: 0px;
+    position: fixed;
+    border: thin solid rgba(56, 56, 56, .2);
+    bottom: 6%;
+    top: 7%;
+    display: none;
+}
+
+#map {
+    width: 80%;
+    position: fixed;
+    left: 0%;
+    top: 7%;
+    bottom: 6%;
+    border: thin solid rgba(56, 56, 56, .2);
+    z-index: 0;
+}
+
+#search {
+    width: 20%;
+    position: fixed;
+    left: 80%;
+    border: thin solid rgba(56, 56, 56, .2);
+    top: 7%;
+    bottom: 6%;
+}
+
+footer {
+    position: fixed;
+    height: 5%;
+    width: 100%;
+    bottom: 0px;
+    background-color: #F5F5F5;
+}
+
+#placesearch {
+    width: 30%;
+}
+.comments{
+	margin-left: 5%;
+	margin-top: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+	width: 90%;
+	border: thin solid #BD5656;
+	height: 130px;
+	overflow-y: scroll;
+}
+
+#topFixedNavbar1 li:hover {
+	background-color: #D0D0D0;
+}
+
+.annotation {
+	position: absolute;
+	z-index: 9999;
+	width: 30%;
+	height: 250px;
+	left: 28%;
+	bottom: 6%;
+	background-color: rgba(0, 0, 255, .2);
+}
+.button {
+	width: 100px;
+	height: 30px;
+	border-radius: 5px;
+	font-family: 'Tangerine', Lato;
+	font-size: large;
+}
+
+.livestock{
+	padding: 5px;
+	color: white;
+	background-color: #20500F;
+}
+.pollution{
+	padding: 5px;
+	color: white;
+	background-color: #114467;
+}
+.fertilizer{
+	padding: 5px;
+	color: white;
+	background-color: #7E6109;
+}
+
+#search p{ padding: 7px; }
+
+#search .viewcomment{ 
+	width: 30%;
+	float: right
+	}
+.comments>div{
+	margin-top: 20px;
+	margin-bottom: 5px;
+}

@@ -1,0 +1,359 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://openlayers.org/en/v3.15.1/build/ol.js" type="text/javascript"></script>
+    <title>Public Map</title>
+    <!-- <link href="css/bootstrap.css" rel="stylesheet" type="text/css"> -->
+    <link href="css/bootstrap-3.3.6.css" rel="stylesheet" type="text/css">
+    <link href="publicmap.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="http://openlayers.org/en/v3.15.1/css/ol.css" type="text/css">
+    <!-- Jquery -->
+    <script src="js/jquery-ui.js" type="text/javascript" charset="utf-8" async defer></script>
+    <script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8" async defer></script>
+    <link rel="stylesheet" type="text/css" href="js/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <style>
+    .map:-moz-full-screen {
+        height: 100%;
+    }
+    
+    .map:-webkit-full-screen {
+        height: 100%;
+    }
+    
+    .map:-ms-fullscreen {
+        height: 100%;
+    }
+    
+    .map:fullscreen {
+        height: 100%;
+    }
+    
+    .ol-rotate {
+        top: 3em;
+    }
+    </style>
+</head>
+
+<body style="padding-top: 70px" id="wrapper">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid" id="nav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#topFixedNavbar1" aria-expanded="false"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                <a class="navbar-brand" href="#" style="font-weight:bold">Water Evaluation Group</a></div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="topFixedNavbar1">
+                <ul class="nav navbar-nav">
+                    <li id="pan"><a href="#">Center Gully Creek<span class="sr-only">(current)</span></a></li>
+                    <li id="geolocate"><a href="#">Geolocate</a></li>
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Annotating<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li id="point"><a href="#">Point</a></li>
+                            <li id="line"><a href="#">Line</a></li>
+                            <li id="polygon"><a href="#">Polygon</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li id="finish"><a href="#">Finish</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <!--                 <form class="form-inline">
+                    <label>Geometry type &nbsp;</label>
+                    <select id="type">
+                        <option value="Point">Point</option>
+                        <option value="LineString">LineString</option>
+                        <option value="Polygon">Polygon</option>
+                        <option value="Circle">Circle</option>
+                        <option value="Square">Square</option>
+                        <option value="Box">Box</option>
+                        <option value="None">None</option>
+                    </select>
+                </form> -->
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Export</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <section id="history">
+    </section>
+    <section id="map" class="map">
+    </section>
+    <section id="search">
+        <div class="comments">
+            <div id="1">
+                <a> <span class="pollution"> pollution </span> </a>
+                <button class="viewcomment"> View </button>
+            </div>
+            <p>comments test Lorem ipsum dolor sit amet, conlabore a quo? Omnis adipisci ex fugiat magni incidunt vero dicta, quis rem. Officia?</p>
+        </div>
+        <div class="comments">
+            <div id="2">
+                <a> <span class="fertilizer">fertilizer </span> </a>
+                <button class="viewcomment"> View </button>
+            </div>
+            <p>comments test Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum sunt officia corrupti, vero quasi minus eveniet maiores incidunt dignissimos excepturi, nulla ex beatae. In ducimus dolor nam dolores, dignissimos mollitia! Eligendi eum voluptatum, numquam quaerat vel labore a quo? Omnis adipisci ex fugiat magni incidunt vero dicta, quis rem. Officia?</p>
+        </div>
+        <div class="comments">
+            <div id="3">
+                <a> <span class="livestock"> livestock </span> </a>
+                <button class="viewcomment"> View </button>
+            </div>
+            <p>comments test Lorem ipsum dolor sit amet, consectetur adip? Omnis adipisci ex fugiat magni incidunt vero dicta, quis rem. Officia?</p>
+        </div>
+    </section>
+    <section class="annotation">
+        <div style="position: absolute; margin: 2%; width:96%; height: 94%;">
+            <p style="width: 80%; margin:3%"> <span style="font-family: 'Tangerine', Lato; font-size:x-large;">Tag: &nbsp;&nbsp;</span>
+                <select id="tag" name="cars" style="width: 50%">
+                    <option value="wp">pollution</option>
+                    <option value="fertilizer">fertilizer</option>
+                    <option value="ls">livestock</option>
+                </select>
+            </p>
+            <p style="width: 80%; margin:3%"><span style="font-family: 'Tangerine', Lato; font-size:x-large;">Comments:</span>
+                <textarea name="comments" placeholder="write comments here" style="margin-left:7%; padding: 5px; width: 100%"></textarea>
+            </p>
+            <p style="width: 80%; margin:3%">
+                <button class="button" id="submit" style="margin-left: 30%">Submit</button>
+                <button class="button" id="delete" style="margin-left: 10%">Delete</button>
+            </p>
+        </div>
+    </section>
+    <footer></footer>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <!-- <script src="js/bootstrap.js"></script> -->
+    <script src="js/bootstrap-3.3.6.js"></script>
+    <script type="text/javascript">
+    function mapinit() {
+        // define control
+        var scaleLineControl = new ol.control.ScaleLine();
+        // some styles for the vector layer
+        var fill = new ol.style.Fill({
+            color: 'rgba(0,0,0,0.2)'
+        });
+
+        var stroke = new ol.style.Stroke({
+            color: 'white'
+        });
+
+        var circle = new ol.style.Circle({
+            radius: 6,
+            fill: fill,
+            stroke: stroke
+        });
+
+        var vectorStyle = new ol.style.Style({
+            fill: fill,
+            stroke: stroke,
+            image: circle
+        });
+
+        // define map
+        var raster = new ol.layer.Tile({
+            source: new ol.source.OSM()
+        });
+
+        var vector = new ol.layer.Vector({
+            source: new ol.source.Vector({
+                url: 'data/geojson/basin.json',
+                format: new ol.format.GeoJSON()
+            }),
+            style: vectorStyle
+        });
+        var lonlat = ol.proj.transform([-49166508.4895, 5406080.9347], 'EPSG:3857', 'EPSG:4326');
+        var gullycreek = ol.proj.fromLonLat(lonlat);
+        var view = new ol.View({
+            center: [-49166508.4895, 5406080.9347],
+            zoom: 14
+        });
+
+        var map = new ol.Map({
+            controls: ol.control.defaults({
+                attributionOptions: /** @type {olx.control.AttributionOptions} */ ({
+                    collapsible: false
+                })
+            }).extend([
+                new ol.control.FullScreen(),
+                scaleLineControl
+            ]),
+            layers: [raster, vector],
+            loadTilesWhileInteracting: true,
+            target: 'map',
+            view: view
+        });
+
+        var panToGC = document.getElementById('pan');
+        panToGC.addEventListener('click', function() {
+            alert("hello");
+            var pan = ol.animation.pan({
+                duration: 500,
+                source: (view.getCenter())
+            });
+            map.beforeRender(pan);
+            view.setCenter(gullycreek);
+        }, false);
+
+        // Draw feature
+
+        var features = new ol.Collection();
+        var featureOverlay = new ol.layer.Vector({
+            source: new ol.source.Vector({
+                features: features
+            }),
+            style: new ol.style.Style({
+                fill: new ol.style.Fill({
+                    color: 'rgba(255, 255, 255, 0.2)'
+                }),
+                stroke: new ol.style.Stroke({
+                    color: '#ffcc33',
+                    width: 2
+                }),
+                image: new ol.style.Circle({
+                    radius: 7,
+                    fill: new ol.style.Fill({
+                        color: '#ffcc33'
+                    })
+                })
+            })
+        });
+        featureOverlay.setMap(map);
+        var lastFeature;
+        var draw;
+        var source = new ol.source.Vector({
+            wrapX: false
+        });
+        var drawpoint = document.getElementById('point');
+        drawpoint.addEventListener('click', function() {
+            featureOverlay.getSource().clear();
+            $('.annotation').hide();
+            map.removeInteraction(draw);
+            draw = new ol.interaction.Draw({
+                source: source,
+                features: features,
+                type: "Point",
+            });
+            map.addInteraction(draw);
+            draw.on('drawend', function(e) {
+                var format = new ol.format.GeoJSON();
+                var featureJson = format.writeFeature(e.feature);
+                $('.annotation').show();
+                draw.setActive(false);
+                lastFeature = e.feature;
+            })
+        });
+        var drawline = document.getElementById('line');
+        drawline.addEventListener('click', function() {
+            featureOverlay.getSource().clear();
+            $('.annotation').hide();
+            map.removeInteraction(draw);
+            draw = new ol.interaction.Draw({
+                source: source,
+                features: features,
+                type: "LineString",
+            });
+            map.addInteraction(draw);
+            draw.on('drawend', function(e) {
+                var format = new ol.format.GeoJSON();
+                var featureJson = format.writeFeature(e.feature);
+                $('.annotation').show();
+                draw.setActive(false);
+                lastFeature = e.feature;
+            })
+        });
+        var drawpolygon = document.getElementById('polygon');
+        drawpolygon.addEventListener('click', function() {
+            featureOverlay.getSource().clear();
+            $('.annotation').hide();
+            map.removeInteraction(draw);
+            draw = new ol.interaction.Draw({
+                source: source,
+                features: features,
+                type: "Polygon",
+            });
+            map.addInteraction(draw);
+            draw.on('drawend', function(e) {
+                var format = new ol.format.GeoJSON();
+                var featureJson = format.writeFeature(e.feature);
+                $('.annotation').show();
+                draw.setActive(false);
+                lastFeature = e.feature;
+            })
+        });
+
+        var drawfinish = document.getElementById('finish');
+        drawfinish.addEventListener('click', function() {
+            draw.setActive(false);
+            featureOverlay.getSource().clear();
+            $('.annotation').hide();
+        });
+
+        map.on('pointermove', function(e) {
+            if (e.dragging) return;
+            var
+                pixel = map.getEventPixel(e.originalEvent),
+                hit = map.hasFeatureAtPixel(pixel);
+            map.getTarget().style.cursor = hit ? 'pointer' : '';
+        });
+
+        document.getElementById('submit').onclick = function savecomments() {
+            $('.annotation').hide();
+            var div = document.createElement('div');
+
+            div.className = 'comments';
+            var tag = document.getElementById("tag");
+            var tagText = tag.options[tag.selectedIndex].text;
+
+            div.innerHTML = '<div id="haha"><a> <span class=' + tagText + '>' + tagText + '</span> </a><button id="4" class="viewcomment"> View </button></div>\
+            <p>' + jQuery("textarea").val() + '</p>';
+
+            document.getElementById('search').appendChild(div);
+            featureOverlay.getSource().clear();
+
+            document.getElementById("4").onclick = function getcomments() {
+                // var coord = lastFeature.getGeometry().getCoordinates();
+                // coord = ol.proj.transform(coord, 'EPSG:3857', 'EPSG:4326');
+                // var lon = coord[0];
+                // var lat = coord[1];
+                // alert(lon.toString());
+                // map.getView().setCenter(ol.proj.transform([lon, lat], 'EPSG:4326', 'EPSG:3857'))
+                var geoExtent = lastFeature.getGeometry().getExtent();
+                var coord = ol.extent.getCenter(geoExtent);
+                center = ol.proj.transform(coord, 'EPSG:3857', 'EPSG:4326');
+                var lon = center[0];
+                var lat = center[1];
+                alert(lon.toString());
+                map.getView().setCenter(ol.proj.transform([lon, lat], 'EPSG:4326', 'EPSG:3857'));
+                featureOverlay.getSource().addFeature(lastFeature);
+                $('.annotation').show();
+            };
+        }
+    }
+
+    $(document).ready(function() {
+        var comments;
+        $('.annotation').hide();
+        mapinit();
+    });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,216 @@
+@charset "utf-8";
+#wrapper {}
+
+#work {
+    width: 100%;
+    height: auto;
+}
+
+#history {
+    width: 20%;
+    margin-left: 0px;
+    position: fixed;
+    border: thin solid rgba(56, 56, 56, .2);
+    bottom: 6%;
+    top: 7%;
+}
+#scenario-description{
+
+width: 100%;
+height: 40%;
+background-color: #994848;
+}
+#scenario-tasks{
+width: 100%;
+height: 60%;
+background-color: #666161;
+}
+
+#map {
+    width: 60%;
+    position: fixed;
+    left: 20%;
+    top: 7%;
+    bottom: 26%;
+    border: thin solid rgba(56, 56, 56, .2);
+    z-index: 0;
+}
+
+#analysis {
+    width: 60%;
+    position: fixed;
+    left: 20%;
+    top: 74%;
+    bottom: 6%;
+    border: thin solid rgba(56, 56, 56, .2);
+    z-index: 0;
+    background-color: #D6AEE6;
+}
+
+#search {
+    width: 20%;
+    position: fixed;
+    left: 80%;
+    border: thin solid rgba(56, 56, 56, .2);
+    top: 7%;
+    bottom: 6%;
+}
+#BMP-selection{
+
+width: 100%;
+height: 60%;
+background-color: #994848;
+}
+#model-interface{
+width: 100%;
+height: 40%;
+background-color: #666161;
+}
+footer {
+    position: fixed;
+    height: 5%;
+    width: 100%;
+    bottom: 0px;
+    background-color: #F5F5F5;
+}
+
+#placesearch {
+    width: 30%;
+}
+
+#scenariopanel {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    /*    top: 10%;
+    left: 10%;*/
+    z-index: 8888;
+    background-color: #383838;
+}
+
+#scenariopanel button {
+    width: 30%;
+    height: 40px;
+    margin-left: 35%;
+    font-family: verdana, arial, sans-serif;
+    -webkit-border-radius: 10;
+    -moz-border-radius: 10;
+    border-radius: 10px;
+    color: #fafafa;
+    background: #3477a3;
+    border: solid #ffffff 3px;
+    text-decoration: none;
+}
+
+#scenariopanel button:hover {
+    background: #3cb0fd;
+    text-decoration: none;
+}
+
+#createScenario {
+    position: absolute;
+    bottom: 20%;
+}
+
+#left input {
+    height: 30px;
+    padding-left: 10px;
+    font-family: verdana, arial, sans-serif;
+}
+
+#left #scenarioname {
+    position: absolute;
+    margin-left: 10%;
+    border: white;
+}
+#left #access {
+    position: absolute;
+    margin-left: 52%;
+    border: white;
+}
+
+#getScenario {
+    position: absolute;
+   bottom: 15%;
+}
+
+#left {
+    position: absolute;
+    width: 30%;
+    height: 30%;
+    background-color: #4A6EB6;
+    z-index: 9999;
+    margin-top: 15%;
+}
+
+#right {
+    position: absolute;
+    width: 30%;
+    height: 50%;
+    background-color: #D95252;
+    z-index: 9999;
+    margin-top: 10%;
+}
+
+#left {
+    position: absolute;
+    margin-left: 15%;
+}
+
+#right {
+    position: absolute;
+    left: 55%;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+}
+
+table {
+    border-collapse: collapse;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 10%;
+}
+
+th {
+    height: 30px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+td {
+    height: 20px;
+    vertical-align: center;
+}
+
+th,
+td {
+    padding: 5px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+tr {
+    background-color: #f5f5f5
+}
+tr:hover {
+    background-color: #4156C2;
+}
+
+.selected {
+    background-color: brown;
+    color: #FFF;
+}
+
+#history p, #search p, #analysis{
+    font-family: verdana, arial, sans-serif;
+    text-align: center;
+    font-size: xx-large;
+    color: white;
+    font-weight: bolder;
+}
